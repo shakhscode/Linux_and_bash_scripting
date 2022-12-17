@@ -1,0 +1,2 @@
+Enter your user name:
+Hello TestUser, welcome to your Virtual Machine.
