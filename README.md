@@ -1,7 +1,10 @@
-# Linux Technical Notes
-Here I am storing some basic notes about linux and shell scripting.
-
-### Contents
+# Linux notes, commands, concepts
+##### Here I am storing some basic notes about linux and shell scripting.
+### Main Cintents
+### [1. Linux Commands and Concepts](#linux-commands-and-concepts)
+### [2. Bash-Shell Scripting](/bash_scripting/README.md) 
+---
+## Linux Commands and Concepts
 
 ### [1. History of Linux](#1-history-of-linux-1)
 ### [2. Linux Kernel](#linux-is-a-kernel)
@@ -61,13 +64,13 @@ E.g: Kali, Ubuntu etc. are popular linux based operating system.
 -  Command Promt (cmd) in windows is equivalent to Terminal in linux.
 
 ### Shell 
-- Shell is a program or a part of the OS that acts like a shell/layer on the top of the kernel (the engine of the OS). It interprets the users commands, communicates with the kernel and helps to execute the user commands.
+- Shell is a software program or that acts like a layer/layer on the top of the kernel (the engine of the OS). It interprets the users commands, communicates with the kernel and helps to execute the user commands.
 
 User -->  Shell --> Kernel --> Hardware
 
 - A shell may have it's own user interface or a CLI. For example in windows Powershell has its own CLI.
 
-- In linux Terminal is the CLI for the shell. So we can write our commands on the terminal or  we can also write a _.sh executable file to deploy the shell for a task.
+- For linux **Terminal** is the CLI for the shell. So we can write our commands on the terminal or  we can also write a _.sh executable file to deploy the shell for a task.
 
 ### Conclusion 
 - **In linux Terminal is the CLI for the shell.  But to interact with the shell Terminal is not the only way. Writing an executable _.sh file is the another way.**
@@ -96,16 +99,16 @@ Root directory--> C:\ | top root directory--> Computer  /
 - ```ls -a ```--> list all including hidden files and directory
 
 
-- ```cd pathname``` --> change directory to the provided path
-```
-cd '2. sql-db'   # This will take to the directory '2. sql-db'
-```
-- cd .. / cd ~  / cd --> change directory to the parent directory
-- mkdir --> to make a directory
+- ```cd path/directory``` --> change directory to the provided path
+
+- ```cd ~ ``` or just  ```cd ``` --> change directory to the home directory
+- ``` cd ..`` --> chnage directory by one step back
+- ``` mkdir  path/directoryName``` --> to make a directory in a specific location
 ```
 mkdir newFolder
+
 #Or in a specific location
-mkdir /home/user/LinuxCommands
+mkdir /home/user/Mydirectory
 
 # To create a hidden directory or file
 mkdir .NewFolder

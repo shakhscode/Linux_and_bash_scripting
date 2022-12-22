@@ -1,5 +1,4 @@
-#!/bin/sh
-
+#!/bin/bash
 echo "Enter your user name:"  #go get the input from the user
 
 read name  #assign user input to a variable 'name' and read it.
