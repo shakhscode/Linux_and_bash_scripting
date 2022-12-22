@@ -115,3 +115,46 @@ Example:
 tarikh = `date`
 echo $tarikh
 ```
+
+### 4. Taking input from the user
+### Taking Single input
+```
+#!/bin/bash
+
+read -p "What is your name: " name
+
+#take the input using read command and store it into the variable 'name'
+
+# use -sp flag to take the input silently (e.g. passwords)
+
+#Now print the name as output
+echo "Hello $name, welcome!"
+```
+
+
+### Taking multiple inputs
+```
+read -p "Enter names: " name1 name2 name3
+
+echo "I am with $name1, $name2 and $name3"
+```
+Give inputs without comma and get the output as follow
+```
+Enter names: Alice Bob Charles
+I am with Alice, Bob and Charles
+```
+Best way to take multiple inputs is-using an array
+```
+echo "Enter the number: "
+
+read -a numbers
+
+echo "The numbers are: ${numbers[@]}"
+```
+
+#### Note: Even if we don't use a variable to take user input, by default input is stored in the system varible REPLY
+
+```
+read -p "Enter a number: "
+echo "The number is: $REPLY"
+```
