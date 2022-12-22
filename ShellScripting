@@ -1,8 +1,0 @@
-Terminal 
-- The terminal is the GUI window that you see on the screen. It takes commands and shows output. 
-Shell and Bash -
-The shell is the software that interprets and executes the various commands that we type in the terminal. Bash is a particular shell.
-
-Bash - It stands for Bourne Again Shell. Some other examples of shell are sh(bourne shell), csh(c shell), tcsh(turbo c shell) etc.
-
-Power Shell- Power Shell is the shell for windows.
