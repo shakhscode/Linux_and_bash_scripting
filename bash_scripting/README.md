@@ -24,7 +24,12 @@ Bash as a scripting langugae
 &nbsp; &nbsp; [Single input](#taking-single-input)
 &nbsp; &nbsp; [Multiple inputs](#taking-multiple-inputs)
 
+[4. Conditional statements- if else](#4-conditional-statements--if-else)
+
+&nbsp; &nbsp; [Common Bash operators](#common-operators-used-in-conditional-statements)
+
 ---
+
 ### What is a shell ?
 A shell is a software program that acts like a layer( i.e., shell) on the top of the kernel (the engine of the OS). It interprets the users commands, communicates with the kernel and helps to execute the user commands.
 
@@ -237,7 +242,8 @@ I am with Alice, Bob and Charles
 ```
 Best way to take multiple inputs is-using an array
 ```
-echo "Enter the number: "
+echo -e "Enter the numbers: \c"
+# -e is used to enable \c which is used to keep the cursor in the same line
 
 read -a numbers
 
@@ -252,3 +258,87 @@ Even if we don't use a variable to take user input, by default input is stored i
 read -p "Enter a number: "
 echo "The number is: $REPLY"
 ```
+
+### 4. Conditional statements- if else
+In Bash we can use if else conditional statements in 4 ways. 
+
+1. if-then-fi  ([Check the example](/scripts/if_then.sh))
+
+```
+if [ condition ]
+   then  
+   statement1
+   statemet2
+fi  #end if
+```
+2. if-then-else-fi ([check the example](/scripts/if_else.sh))
+```
+if [ condition ]
+   then
+   statement1
+   statemet2
+else 
+   statement3
+   statemet4
+fi
+```
+3. if -then-elif-then-else-fi ([Check the example](/scripts/if_elif_else.sh))
+
+```
+if [ condition_1 ]
+   then
+   statement1
+   
+elif [ condition_1 ]
+   then
+   statemet2
+else
+   statement3
+fi
+```
+
+4. Nested if else 
+([Check an example here](/scripts/nested_if_else.sh))
+
+### Common operators used in conditional statements
+```-n VAR``` ---> True if the length of VAR is greater than zero.
+
+```-z VAR``` --> True if the VAR is empty.
+
+```string1 = string2``` -->  True if STRING1 and STRING2 are equal.
+
+```STRING1 != STRING2``` --> True if STRING1 and STRING2 are not equal.
+
+```-eq``` --> equal 
+
+``` -gt ``` --> greater than 
+
+```-lt``` --> less than 
+
+```-ge``` --> greater than equal 
+
+```-le ``` --> less than equal
+
+``` ! ``` --> not equal
+
+``` && ``` --> logical AND
+
+``` || ``` --> logical OR
+
+
+```-h FILE``` --> True if the FILE exists and is a symbolic link.
+
+```-r FILE ```--> True if the FILE exists and is readable.
+
+```-w FILE``` --> True if the FILE exists and is writable.
+
+```-x FILE``` --> True if the FILE exists and is executable.
+
+```-d dir``` --> True if the directory 'dir' exists.
+
+```-e FILE ``` --> True if the FILE exists.
+
+```-f FILE``` --> True if the FILE exists and is a regular file (not a directory or device).
+
+**Note:**
+Keep in mind that in different situations ```[ condition ]``` or ```[[ condition ]]``` or ``` (( condition ))``` syntax is used to specify the conditions.
