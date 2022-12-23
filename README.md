@@ -1,26 +1,27 @@
-# Linux notes, commands, concepts
-##### Here I am storing some basic notes about linux and shell scripting.
-### Main Cintents
-### [1. Linux Commands and Concepts](#linux-commands-and-concepts)
-### [2. Bash-Shell Scripting](/bash_scripting/README.md) 
+# Linux & Shell Scripting
+### [1. Linux - concepts & basic commands](#linux-concepts-and-commands)
+
+### [2. Shell scripting - Bash scripting](/bash_scripting/README.md) 
 ---
-## Linux Commands and Concepts
+## Linux concepts and commands
+[History of Linux](#history-of-linux) 
+&nbsp; &nbsp; [Linux Kernel](#linux-is-a-kernel)
+&nbsp; &nbsp; [CLI](#cli)
+&nbsp; &nbsp; [Terminal](#terminal)
+&nbsp; &nbsp; [Shell](#shell)
+&nbsp; &nbsp; [win vs linux](#windos-vs-linux)
 
-### [1. History of Linux](#1-history-of-linux-1)
-### [2. Linux Kernel](#linux-is-a-kernel)
-### [3. Basics of Linux](#3-basics-of-linux-1)
-### &nbsp; &nbsp; [3.1 CLI, Terminal, Shell](#31-cli-terminal-shell-1)
-### &nbsp; &nbsp; [3.2 Basic terminologies & differences](#32-basic-terminologies-and-differences)
+### [1. Basics of Linux](#1-basics-of-linux-1)
 
-### [4. Some  basic commands](#4-some-basic-commands-1)
+### [2. Some  basic commands](#2-some-basic-commands-1)
 
-### [5. File Handling in Linux](#5-file-handling-in-linux-1)
+### [3. File Handling in Linux](#3-file-handling-in-linux-1)
 &nbsp; &nbsp; [touch](#touch)
 &nbsp; &nbsp; [gedit](#gedit----default-gui-text-editor) &nbsp; &nbsp; [nano](#nano-editor) &nbsp; &nbsp; [vi](#vi-editor) &nbsp; &nbsp; [cat](#cat-from-concatenate) 
 
 ### [6. Some more Linux commands](#6-some-more-linux-commands-1)
 ***
-### 1. History of Linux
+### History of Linux
 ### Unix
 The original idea to create a multipurpose OS was started in 1964 in Bell Telephone Labs/ Bell Labs (Nokia acquired Bell Labs in 2016)
 - In 1969 Denis Ritche and Kem Thompson created a multipurpose operating system in Bell Labs  and named as 'Unics' - Uniplexed Information & Computing Service for inside use at Bell Systems. 
@@ -48,9 +49,7 @@ E.g: Mac OS is derived from UNIX.
 - Combining a Linux Kernel with GNU software makes a perfect operating system. GNU adds other parts and facilities that a users need in an operationg system.
 E.g: Kali, Ubuntu etc. are popular linux based operating system.
  
-### 3. Basics of Linux
-
-### 3.1 CLI, Terminal, Shell
+### Differences between CLI, Terminal, Shell
 ### CLI 
 - There are two ways to use an opearating system or any software. One is CLI(Command line interface) and the other one is GUI (Graphical user interface). 
 - To do something in a computer, we can either use the mouse to click GUI icons and options  or we can write - what the computer should do. The interface where we can write our commands in text form to interact with a software or the computer is called a command line interface or CLI. 
@@ -75,7 +74,7 @@ User -->  Shell --> Kernel --> Hardware
 ### Conclusion 
 - **In linux Terminal is the CLI for the shell.  But to interact with the shell Terminal is not the only way. Writing an executable _.sh file is the another way.**
 
-### 3.2 Basic terminologies and differences
+### Windos vs. Linux
 
 Windows | Linux
 --------|------
@@ -87,11 +86,14 @@ Root directory--> C:\ | top root directory--> Computer  /
 - There are always two kinds of users in Linux. One is 'root user' who is the administrator of the whole system. And the other one is normal user.
 - There can be multiple normal users.
 
+### 1. Basics of Linux
+
+
 ### File Hierarchy in Linux
 ![](Directories.jpg)
 
 
-### 4. Some basic commands
+### 2. Some basic commands
 - ```pwd``` --> print work directory. To get the present working directory.
 
 - ```ls ```--> list the sub directories avaiable in the present directory
@@ -122,7 +124,7 @@ cp /home/user/Mini2/login.txt /home/user
 - ``` mv source destination ``` --> to move a file or contents of a file from a source to a destination
 - ``` mv oldname newname ``` --> to rename a file/ directory
 
-### 5. File Handling in Linux
+### 3. File Handling in Linux
 
 
 > ### touch 
@@ -212,11 +214,6 @@ vi/vim is not installed in my system.
 ``` ifconfig``` -->  ifconfig command is used to configure the kernel-resident network interfaces.
 
 - If no arguments are given, ifconfig command displays the status of the currently active interfaces.
-
-``` wait a new code will come here ``` -->  
-
-### Shell scripting
-#Github issues
 
 
 
