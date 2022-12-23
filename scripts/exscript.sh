@@ -10,4 +10,5 @@ echo "Hello ${name}"
 #Or we can print as 
 echo "Hello $name"
 
+#print the number
 echo $num
