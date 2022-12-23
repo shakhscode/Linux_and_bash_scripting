@@ -15,6 +15,10 @@ Bash as a scripting langugae
 
 [2. Bash data structure](#2-bash-data-structure) 
 
+&nbsp; &nbsp; [Numerically indexed array](#create-a-numerically-indexed-array)
+&nbsp; &nbsp; [Associative array](#create-an-associative-array)
+&nbsp; &nbsp; [Array operations](#array-operations)
+
 [3. Taking user inputs](#3-taking-input-from-the-user)
 
 &nbsp; &nbsp; [Single input](#taking-single-input)
@@ -116,17 +120,94 @@ System variables are created and maintained by the operating system itself.
 - Generally these variables are defined in CAPITAL LETTERS.
 - Some of the system defined variables are ```HOME, USER, UID``` etc.
 
-**Important Note: We can assign the output of a command or a variable to another variable using a backtocks ``` (` `) ```**
+**Important Notes:**
+
+We can assign the output of a command or a variable to another variable using a backtocks ``` (` `) ```
 
 Example:
 ```
 tarikh = `date`
 echo $tarikh
 ```
+**Bash variables and commands are case sensitive.**
 
 ### 2. Bash data structure
+Bash array is a 1-dimensional structure to store data. A Bash array can store data of both numerical and string types. (So we can consider a Bash array as a python list)
+- Bash does not support multidimensional arrays, and we can’t have array elements that are also arrays.
+- There is no limit on the maximum number of elements that can be stored in an array.
 
-### 3 Taking input from the user
+There are  mainly 2 types of arrays -
+
+- 1 D numerically indexed array which are referenced using integers starting from 0. (-1 refer to the last element)
+- Associative arrays which stores data in kay-value pair and is indexed by keys.
+
+### Create a numerically indexed array
+
+It is not necessary to declare a numerically indexed array, we can define it on the way.
+ 
+```
+arrayName=(el1 el2 elN)     
+#Note that no comma (,) is not required between the elements
+```
+Or, we can declare explicitly as 
+```
+declare -a arrayName
+arrayName[index_1]=value_1
+arrayName[index_2]=value_2
+arrayName[index_n]=value_n
+```
+### Create an associative array
+Unlike numerically indexed, the associative arrays must be declared before they can be used. So we can declare as
+
+```
+declare -A arrayName
+arrayName[key1]=value1
+arrayName[key2]=value2
+```
+Or,  in a simple way 
+```
+declare -A arrayName=([key1]=value1 [key2]=value2)
+```
+### [Array operations](/scripts/arrayOps.sh)
+
+Extract a particular element: ```${}```
+
+```
+var=${arrayName[index/key]}
+```
+Access all elements: ```${[@]}```
+```
+var2=${myArray[@]}
+
+#Or, 
+
+var2=${myArray[*]}
+```
+Get the length of an array: ```${#}```
+```
+echo "Length of arr1: ${#arr[*]}"
+```
+Get the indices/keys of an array: ```${!}```
+```
+#get index (for numerically indexed array)
+echo "Indices of arr1 ${!arr1[@]}"
+
+#get keys (for associative arrays)
+echo "Keys of arr2: ${!arr2[@]}"
+```
+
+Add a new element (same syntax can be used to update values)
+```
+arrayName[index/key]=value
+```
+
+Delete an element: ```unset```
+```
+unset arrayName[key/index]
+```
+
+
+### 3. Taking input from the user
 
 ### Taking Single input
 ```
