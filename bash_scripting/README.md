@@ -1,10 +1,24 @@
 ## Bash Scripting
 ### Contents
 [What is a shell ?](#what-is-a-shell)
+&nbsp; &nbsp;[Basics of shell scripting](#basics-of-shell-scripting)
+&nbsp; &nbsp; [Bash Shell](#bash-shell)
 
-[1. Basics of shell scripting](#1-basics-of-shell-scripting)
+Bash as a scripting langugae
 
-[2. Bash scripting](#2-starting-with-bash-scripting)
+[1. Variables](#1-variables-in-bash) 
+
+&nbsp; &nbsp; [Variables declaration](#define-a-variable)
+&nbsp; &nbsp; [Readonly variables](#read-only-variables)
+&nbsp; &nbsp; [Unset a variable](#unset-a-variable)
+&nbsp; &nbsp; [System variables](#system-variables)
+
+[2. Bash data structure](#2-bash-data-structure) 
+
+[3. Taking user inputs](#3-taking-input-from-the-user)
+
+&nbsp; &nbsp; [Single input](#taking-single-input)
+&nbsp; &nbsp; [Multiple inputs](#taking-multiple-inputs)
 
 ---
 ### What is a shell ?
@@ -24,7 +38,8 @@ There are different languages and syntax for shell scripting, used for different
 - Some other examples of shell are sh(bourne shell), csh(c shell), tcsh(turbo c shell) etc.
 
 **Note: Bash is default shell in most of the linux based Operating system including Ubuntu.**
-### 1. Basics of shell scripting
+
+## Basics of shell scripting
 - Shell scripting languages are interpreted language and interpreted by the respective shell. 
 
 For example: Bash is a shell scripting language which is interpreted by the  Bash shell.
@@ -44,19 +59,11 @@ In the above example:  ```#!/bin/bash``` means, **the bash shell** will be used 
 - It is not mendatory to use the hashbang and to specify the interpreter.  If we don't use the shebang, then the default shell interpreter will be used to execute the script.
 - But in practice we use it, because there are several shells available for Linux and UNIX systems. While these shells have mostly common syntax, they do have different syntax or different way of handling things. So to be very specific we mention which interpreter to be used.
 
-## 2. Starting with Bash scripting
+### Bash Shell
 Bash - It stands for Bourne Again Shell, it is the improved version of the ```sh``` (original Bourne shell).
 
-### Bash as a programming langugae
-[2.1 Variables](#21-variables-in-bash) 
-
-&nbsp; &nbsp; [Variables declaration](#define-a-variable)
-&nbsp; &nbsp; [Readonly variables](#read-only-variables)
-&nbsp; &nbsp; [Unset a variable](#unset-a-variable)
-&nbsp; &nbsp; [System variables](#22-types-of-variables-in-shell-scripting)
-
-
-### 2.1 Variables in Bash
+## Bash as a scripting language
+### 1. Variables in Bash
 Like any other programming langugae the name of a variable should start with only alphabets (a to z or A to Z) then can contain numbers ( 0 to 9) or the underscore character ( _).
 
 #### Define a variable
@@ -80,6 +87,7 @@ echo $num
 Although we can define a variable in such a simple way, but for advance declarations ```declare``` command is used.
 
 [Check why we need to use declare command](https://phoenixnap.com/kb/bash-declare#arrays)
+
 #### Read only variables
 To define a static variable to ensure that its value can't be changed in future, we can use ```readonly``` command. 
 [validate the point by running this script](/scripts/readonlyExample.sh) .It will give an warning like 
@@ -116,7 +124,10 @@ tarikh = `date`
 echo $tarikh
 ```
 
-### 4. Taking input from the user
+### 2. Bash data structure
+
+### 3 Taking input from the user
+
 ### Taking Single input
 ```
 #!/bin/bash
@@ -152,7 +163,9 @@ read -a numbers
 echo "The numbers are: ${numbers[@]}"
 ```
 
-#### Note: Even if we don't use a variable to take user input, by default input is stored in the system varible REPLY
+**Note:**
+
+Even if we don't use a variable to take user input, by default input is stored in the system varible REPLY
 
 ```
 read -p "Enter a number: "
