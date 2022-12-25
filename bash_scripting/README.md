@@ -24,9 +24,13 @@ Bash as a scripting langugae
 &nbsp; &nbsp; [Single input](#taking-single-input)
 &nbsp; &nbsp; [Multiple inputs](#taking-multiple-inputs)
 
-[4. Conditional statements- if else](#4-conditional-statements--if-else)
+[4. Conditional statements](#4-conditional-statements)
 
-&nbsp; &nbsp; [Common Bash operators](#common-operators-used-in-conditional-statements)
+&nbsp; &nbsp; [4.1 If-else](#41-if-else)
+
+&nbsp; &nbsp; [4.2 Case Statements](#42-case-statements)
+
+&nbsp; &nbsp; [Some commonly used Bash operators](#common-operators-used-in-conditional-statements)
 
 [5. Printing outputs](#5-printing-outputs)
 
@@ -194,6 +198,15 @@ var2=${myArray[@]}
 
 var2=${myArray[*]}
 ```
+Extract a range of elements
+```
+a=( 12 13 14 15 18 19 )
+
+#Extract elements of a from 0 index to index 3
+echo ${a[@]:0:3}
+```
+#note that ${a[0:3]} is a wrong syntax in bash.
+
 Get the length of an array: ```${#}```
 ```
 echo "Length of arr1: ${#arr[*]}"
@@ -265,7 +278,8 @@ read -p "Enter a number: "
 echo "The number is: $REPLY"
 ```
 
-### 4. Conditional statements- if else
+### 4. Conditional statements
+### 4.1 If-else
 In Bash we can use if else conditional statements in 4 ways. 
 
 1. if-then-fi  ([Check the example](/scripts/if_then.sh))
@@ -305,6 +319,46 @@ fi
 
 4. Nested if else 
 ([Check an example here](/scripts/nested_if_else.sh))
+
+### [4.2 Case statements](/scripts/caseEx.sh)
+Case statements are helpful when we need to use multiple if else statements.
+
+General Syntax:
+```
+case EXPRESSION in
+
+  PATTERN_1)
+    STATEMENTS
+    ;;    #double semicolons are important
+
+  PATTERN_2)
+    STATEMENTS
+    ;;
+
+  PATTERN_N)
+    STATEMENTS
+    ;;
+
+  *)    #the default case
+    STATEMENTS
+    ;;
+esac
+```
+- We can use multiple patterns separated by the | operator. The ) operator terminates a pattern list.
+- It is a common practice to use the wildcard asterisk symbol (*) as a final pattern to define the default case. This pattern will always match.
+
+[Explore the exmaple to know how it works.](/scripts/caseEx.sh)
+
+- If no pattern is matched, the return status is zero. **Otherwise, the return status is the exit status of the executed commands.**
+
+### Exit Status
+Each shell command returns an exit code when it terminates, either successfully or unsuccessfully.
+
+By convention, an exit code of zero indicates that the command completed successfully, and non-zero means that an error was encountered.
+
+**Note**:
+
+The Bash case statement has a similar concept with the Javascript or C switch statement. The main difference is that unlike the C switch statement, the Bash case statement doesn’t continue to search for a pattern match once it has found one and executed statements associated with that pattern.
 
 ### Common operators used in conditional statements
 ```-n VAR``` ---> True if the length of VAR is greater than zero.
@@ -357,7 +411,7 @@ fi
 
 ```%``` --> modulas operator
 
-Exampe: Find the remainder 
+Example: Find the remainder 
 ```
 num1=10
 num2=3
@@ -370,7 +424,7 @@ Keep in mind that in different situations ```[ condition ]``` or ```[[ condition
 ### 5. Printing outputs
 Most commonly used output command is ```echo```. 
 
-- ```echo``` by default consider every output as strings.
+- ```echo``` by default considers every output as strings.
 - So, ```$``` or ```${}``` is used as space holder for variables.
 
 Example 1: print only plain text

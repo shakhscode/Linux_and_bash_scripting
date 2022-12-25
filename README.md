@@ -104,7 +104,7 @@ Root directory--> C:\ | top root directory--> Computer  /
 - ```cd path/directory``` --> change directory to the provided path
 
 - ```cd ~ ``` or just  ```cd ``` --> change directory to the home directory
-- ``` cd ..`` --> chnage directory by one step back
+- ``` cd -``` or ``` cd ..``` --> chnage directory to one step back
 - ``` mkdir  path/directoryName``` --> to make a directory in a specific location
 ```
 mkdir newFolder
