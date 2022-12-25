@@ -28,6 +28,12 @@ Bash as a scripting langugae
 
 &nbsp; &nbsp; [Common Bash operators](#common-operators-used-in-conditional-statements)
 
+[5. Printing outputs](#5-printing-outputs)
+
+[6. Loops in Bash]
+
+[7. Functions in Bash]
+
 ---
 
 ### What is a shell ?
@@ -323,7 +329,11 @@ fi
 
 ``` && ``` --> logical AND
 
+``` [ condition1 -a condition2 ] ``` --> Also logical AND
+
 ``` || ``` --> logical OR
+
+``` [ condition1 -o condition2 ] ``` --> Also logical OR
 
 
 ```-h FILE``` --> True if the FILE exists and is a symbolic link.
@@ -340,5 +350,70 @@ fi
 
 ```-f FILE``` --> True if the FILE exists and is a regular file (not a directory or device).
 
+#### Some other operators
+```+``` --> Addition
+
+```/``` --> Division
+
+```%``` --> modulas operator
+
+Exampe: Find the remainder 
+```
+num1=10
+num2=3
+echo "Remainder: $(expr $num1 % $num2 )"
+```
+
 **Note:**
 Keep in mind that in different situations ```[ condition ]``` or ```[[ condition ]]``` or ``` (( condition ))``` syntax is used to specify the conditions.
+
+### 5. Printing outputs
+Most commonly used output command is ```echo```. 
+
+- ```echo``` by default consider every output as strings.
+- So, ```$``` or ```${}``` is used as space holder for variables.
+
+Example 1: print only plain text
+
+```
+echo Hello world!
+```
+Or,
+```
+echo "Hello world!"
+```
+
+Example 2: print variable with strings
+```
+num1=10
+echo  "Hello I have $num1 apples."
+```
+Or,
+```
+num1=10
+echo  "Hello I have ${num1} apples."
+```
+Example 3: print multiple variables
+```
+num1=10
+num2=20
+num3=30
+echo " $num1 + $num2 + $num3 = $(( num1+num2+num3 )) "
+```
+#here ```$(( num1+num2+num3 ))``` is a way to perform arithmatic operations.
+
+Example 4: printing all elements of an array
+```
+arr=( 1 2 3 4 )
+echo ${arr[@]}
+```
+
+Example 5: directly print the result of an arithmatic operation
+```
+num1=10.3
+num2=3
+echo "scale=4; $num1/$num2" | bc
+```
+#scale=4 means round off to 4 decimal places. bc is the calculator.
+### 5. Loops in Bash
+

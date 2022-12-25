@@ -205,6 +205,11 @@ vi/vim is not installed in my system.
 
 > ### cat (from concatenate)
 
+### File permissions
+chmod +x,w,h> --> Grant permission
+chmod - --> Remove permission. 
+
+
 ### 6. Some more Linux commands
 
 ``` hostname``` --> Get name of the host machine.
