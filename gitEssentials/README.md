@@ -3,6 +3,16 @@
 
 [Tracking changes with git](#1-tracking-changes-with-git)
 
+&nbsp; &nbsp; &nbsp; [Git configuration](#step-1-git-user-configurations)
+
+&nbsp; &nbsp; &nbsp; [Git init](#step-2-deploy-git-in-a-repository) 
+
+&nbsp; &nbsp; &nbsp; [Working of git](#working-of-git)
+
+&nbsp; &nbsp; &nbsp; [Add to the staging area](#step-3-adding-to-the-stagging-area)
+
+&nbsp; &nbsp; &nbsp;  [Commit the changes](#step-4-git-commit)
+
 ### What is git
 Git is a version control software that tracks changes in the files in a codebase or project repository.
 
@@ -68,9 +78,33 @@ In order to track the changes in a project repository we need to deploy git in t
 
 **Note:** 
 
-Lets say a file is modified and then added to the stagging area, but not committed. At this situation if the file is modified again, it gets out of the stagging area and we need to add it again to the stagging area.
+Lets say a file is modified and then added to the stagging area, but not committed. At this situation if the file is modified again, it gets out of the stagging area and again we need to add it to the stagging area.
 
-### Adding to the stagging area
+#### Step 3: Adding to the stagging area
+
+```git add file1.py``` --> Stages a single file
+
+``` git add file1.py file2.sh``` --> Stages multiple files
+
+```git add *.sh``` --> Stages all files with a  common pattern
+
+```git add . ``` --> Stages the current directory and all its content
+
+#### Removing from stagging area
+Lets say some files are added to the stagging area by mistake now we want to remove them from stagging area.
+
+```git rm --cached file1.js``` --> Remove from staging area only.
+
+
+If we want not to track the changes 
+
+#### Step 4: Git Commit
+
+#### Know the status 
+
+```git status``` --> Full status
+
+```git status -s ``` --> Short status in M, D form.
 
 ### 2. Local to Remote repo in Github
 
