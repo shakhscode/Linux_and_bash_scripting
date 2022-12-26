@@ -2,11 +2,3 @@ git stash
 
 git stash apply
 
-
-A .gitignore file is a plain text file that contains a list of all the specified files and folders from the project that Git should ignore and not track.
-
-
-Lets see how it works.
-
-So first create a .gitignore file --> add the filename or directory path (from the present git path) that yopu want to be ignored. 
---> After that if you add all files by "git add ." ignored files will not be added.

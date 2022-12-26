@@ -3,13 +3,17 @@
 
 [Tracking changes with git](#1-tracking-changes-with-git)
 
-&nbsp; &nbsp; &nbsp; [Git configuration](#step-1-git-user-configurations)
+&nbsp; &nbsp; &nbsp; [Git configuration](#git-user-configurations)
 
-&nbsp; &nbsp; &nbsp; [Git init](#step-2-deploy-git-in-a-repository) 
+&nbsp; &nbsp; &nbsp; [Git init](#deploy-git-in-a-repository) 
 
 &nbsp; &nbsp; &nbsp; [Working of git](#working-of-git)
 
-&nbsp; &nbsp; &nbsp; [Add to the staging area](#step-3-adding-to-the-stagging-area)
+&nbsp; &nbsp; &nbsp; [Add files to  stagging area](#adding-files-to-the-stagging-area)
+
+&nbsp; &nbsp; &nbsp; [Remove from stagging area](#removing-from-stagging-area)
+
+&nbsp; &nbsp; &nbsp; [git ignore](#ignoring-files-from-tracking)
 
 &nbsp; &nbsp; &nbsp;  [Commit the changes](#step-4-git-commit)
 
@@ -21,7 +25,7 @@ Git is a version control software that tracks changes in the files in a codebase
 
 ### 1. Tracking changes with git
 
-#### Step 1: Git user configurations
+### Git user configurations
 Basically git is a software, so as a user of it we need to configure with our credentials like name, email etc.
 
 Git configurations can be done in 3 levels, (priority wise shown below)
@@ -52,7 +56,7 @@ Moreover there are other options to configure the git facilities like core-edito
 
 [Know more about git configurations](https://www.atlassian.com/git/tutorials/setting-up-a-repository/git-config)
 
-#### Step 2: Deploy git in a repository
+### Deploy git in a repository
 
 In order to track the changes in a project repository we need to deploy git in that particular repository.
 
@@ -80,7 +84,14 @@ In order to track the changes in a project repository we need to deploy git in t
 
 Lets say a file is modified and then added to the stagging area, but not committed. At this situation if the file is modified again, it gets out of the stagging area and again we need to add it to the stagging area.
 
-#### Step 3: Adding to the stagging area
+
+### Know the status at any time
+
+```git status``` --> Full status
+
+```git status -s ``` --> Short status in M, D form.
+
+### Adding files to the stagging area
 
 ```git add file1.py``` --> Stages a single file
 
@@ -90,21 +101,33 @@ Lets say a file is modified and then added to the stagging area, but not committ
 
 ```git add . ``` --> Stages the current directory and all its content
 
-#### Removing from stagging area
+### Removing from stagging area
 Lets say some files are added to the stagging area by mistake now we want to remove them from stagging area.
 
-```git rm --cached file1.js``` --> Remove from staging area only.
+```git rm --cached file1.js``` --> Remove from staging area only (i.e send back to the untracked mode)
 
+``` git rm file1.js ``` --> Removes from staging area and deletes the file from working repository also.
 
-If we want not to track the changes 
+### Ignoring files from tracking
+Lets say there are some files or directories in the working directory and we don't want to track changes on them, so we can ignore them by creating a gitignore file.
+
+A ```.gitignore``` file is a plain text file that contains a list of all the specified files and folders from the project that Git should ignore and not track.
+
+- First create a ```.gitignore``` file. It is like a normal text file.
+- Add the files name or directory path (relative path from the present working directory) that we want to be ignored. 
+
+After that if we add all files by "git add .", files in the ignore list will not be added.
+
+If the files are already added to the tracking zone or stagging area we can remove them using the command 
+
+```
+git rm --cached file1.js file2.java
+```
+
 
 #### Step 4: Git Commit
 
-#### Know the status 
 
-```git status``` --> Full status
-
-```git status -s ``` --> Short status in M, D form.
 
 ### 2. Local to Remote repo in Github
 
