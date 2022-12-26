@@ -1,4 +1,5 @@
 # Linux & Shell Scripting
+##### [git essentials](/gitEssentials/README.md)
 ### [1. Linux - concepts & basic commands](#linux-concepts-and-commands)
 
 ### [2. Shell scripting - Bash scripting](/bash_scripting/README.md) 
