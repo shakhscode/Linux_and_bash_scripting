@@ -145,7 +145,7 @@ Git stash is a way to  save the uncommitted changes (both staged and unstaged) t
 - Git stash is used when we need to do something else in between a project modification,  so we can work on something else, and then come back and re-apply changes later on. 
 - Or, we have done some modifications but not quite ready to commit.
 
-```git stash -m “New tax rules”``` --> Creates a new stash
+```git stash ``` --> Creates a new stash, with a message from the last commit.
 
 ```git stash list```  --> Lists all the stashes
 
@@ -153,11 +153,11 @@ Git stash is a way to  save the uncommitted changes (both staged and unstaged) t
 
 ``` git stash show 1``` --> shortcut for stash@{1}
 
-``` git stash apply ``` --> Applies all the stashes to the working directory
+``` git stash apply ``` --> Applies all the stashes to the working directory but does not remove the stashes from the list.
 
-``` git stash pop ``` --> Applies back the latest stash@{0} to the working directory
+``` git stash apply 1 ``` --> Applies the specified stash to the working dir but does not remove the stash from the list.
 
-``` git stash apply 1 ``` --> Applies the specified stash to the working dir
+``` git stash pop ``` --> Applies back the latest stash@{0} to the working directory and removes the stash from the list.
 
 ``` git stash drop 1```  --> Deletes the given stash
 
@@ -165,6 +165,8 @@ Git stash is a way to  save the uncommitted changes (both staged and unstaged) t
 
 
 ### Git Commit
+
+### Check History
 
 
 
