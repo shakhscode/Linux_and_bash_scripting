@@ -104,7 +104,9 @@ Lets say a file is modified and then added to the stagging area, but not committ
 ### Removing from stagging area
 Lets say some files are added to the stagging area by mistake now we want to remove them from stagging area.
 
-```git rm --cached file1.js``` --> Remove from staging area only (i.e send back to the untracked mode)
+``` git restore --staged file1.js``` --> Remove from stagging area, but keep tracking.
+
+```git rm --cached file1.js``` --> Remove from staging area and also stop tracking it.
 
 ``` git rm file1.js ``` --> Removes from staging area and deletes the file from working repository also.
 
@@ -124,8 +126,10 @@ If the files are already added to the tracking zone or stagging area we can remo
 git rm --cached file1.js file2.java
 ```
 
+### Git stash
 
-#### Step 4: Git Commit
+
+### Git Commit
 
 
 
