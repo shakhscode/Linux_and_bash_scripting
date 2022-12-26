@@ -15,7 +15,12 @@
 
 &nbsp; &nbsp; &nbsp; [git ignore](#ignoring-files-from-tracking)
 
-&nbsp; &nbsp; &nbsp;  [Commit the changes](#step-4-git-commit)
+&nbsp; &nbsp; &nbsp; [Check the differences in files](#check-the-differences)
+
+&nbsp; &nbsp; &nbsp; [Git stash](#git-stash)
+
+&nbsp; &nbsp; &nbsp;  [Commit the changes](#git-commit)
+
 
 ### What is git
 Git is a version control software that tracks changes in the files in a codebase or project repository.
@@ -126,7 +131,37 @@ If the files are already added to the tracking zone or stagging area we can remo
 git rm --cached file1.js file2.java
 ```
 
+### Check the differences 
+Viewing the staged/unstaged changes
+
+```git diff``` --> Shows unstaged changes
+
+```git diff --staged``` Shows staged changes
+
+```git diff --cached``` --> Same as the above
+
 ### Git stash
+Git stash is a way to  save the uncommitted changes (both staged and unstaged) temporarily and revert back later when we need. 
+- Git stash is used when we need to do something else in between a project modification,  so we can work on something else, and then come back and re-apply changes later on. 
+- Or, we have done some modifications but not quite ready to commit.
+
+```git stash -m “New tax rules”``` --> Creates a new stash
+
+```git stash list```  --> Lists all the stashes
+
+``` git stash show stash@{1} ```-->Shows the given stash
+
+``` git stash show 1``` --> shortcut for stash@{1}
+
+``` git stash apply ``` --> Applies all the stashes to the working directory
+
+``` git stash pop ``` --> Applies back the latest stash@{0} to the working directory
+
+``` git stash apply 1 ``` --> Applies the specified stash to the working dir
+
+``` git stash drop 1```  --> Deletes the given stash
+
+``` git stash clear ``` -->  Deletes all the stashes
 
 
 ### Git Commit
