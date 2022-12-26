@@ -56,10 +56,17 @@ In order to track the changes in a project repository we need to deploy git in t
 
 - A new file just added to the working_dir --> it is in untracked (```U```) mode. Untracked files are shown in red color on typing 'git status'.
 
-- Then the file is added to the stagging area.
+- Then the file is added to the stagging area. In the stagging area all the added files (completely new or those that were stagged before) are shown in green color. And after any modification on them, they are marked as modified (```M```).
 
-- Then we do modifications and 
+- Then they are committed. 
 
+- Once committed, the files are out of stagging area but in tracking zone, in static (unmodified) mode.
+
+- Now git will track any change to those files present in tracking zone.
+
+- Now, if we do any modification on the files in tracking zone,they are marked as modified (```M```) but we can't commit tehm directly.
+
+- To commit we need to add them again to the stagging area and then we can commit.
 
 
 ### 2. Local to Remote repo in Github
