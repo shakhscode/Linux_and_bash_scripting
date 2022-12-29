@@ -470,4 +470,84 @@ echo "scale=4; $num1/$num2" | bc
 ```
 #scale=4 means round off to 4 decimal places. bc is the calculator.
 ### 5. Loops in Bash
+### [5.1 While loop](/scripts/while_loop.sh)
 
+The logic and rules for while loop is similar to other programming languages.
+
+Syntax:
+```
+while [ condition ]
+do 
+  statement1
+  statement2
+  statement3
+done
+```
+### [5.2 For loop]
+
+For loop in Bash convey the similar logic as 'for loop' does in any other programming language.
+
+But it has different implementation syntax for different purposes.
+
+[Syntax 1: Similar to python](/scripts/basic_for_loop.sh)
+```
+for i in {start..end..increment/decrement}
+do 
+  command1
+  command2
+done
+```
+
+[Syntax 2: Similar to C language](/scripts/basic_for_loop.sh)
+```
+for (( initialization; condition; increment/decrement ))
+do 
+  command1
+  command2
+done
+```
+[Syntax 3: Iterate through objects](/scripts/iterate_through_files.sh)
+```
+for f in file1 file2 file3
+do 
+ command1 on f
+ command2 on f
+done
+```
+[Syntax 4: Iteratively execute commands](/scripts/forloop_for_commands.sh)
+```
+for Command_OUTPUT in command1 command2 command3
+do 
+  statement1 on $command_OUTPUT
+  statement2 on $command_OUTPUT
+done
+```
+
+### [5.3 Until loop](/scripts/untilloop.sh)
+
+**The until loop works until  the ```[ condition ]``` is flase.**
+
+Syntax:
+```
+until [ condition ]
+do 
+  statement1
+  statement2
+done
+```
+
+### [5.4 Select loop](/scripts/selectLoop.sh)
+
+It iterates through a list, and gives an indexed list, then gives a desired output based on our selection.
+
+Select is best to use with case satements.
+
+```
+select Variable in list
+do 
+  command1
+  command2
+done
+```
+
+### 5.5 Break & Continue
