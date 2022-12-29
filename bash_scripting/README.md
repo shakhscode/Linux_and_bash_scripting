@@ -34,7 +34,13 @@ Bash as a scripting langugae
 
 [5. Printing outputs](#5-printing-outputs)
 
-[6. Loops in Bash]
+[6. Loops in Bash](#6-loops-in-bash)
+
+&nbsp; &nbsp; [While loop](#61-while-loop)
+&nbsp; &nbsp; [For loop](#62-for-loop)
+&nbsp; &nbsp; [Until loop](#63-until-loop)
+&nbsp; &nbsp; [Select loop](#64-select-loop)
+&nbsp; &nbsp; [break & continue](#65-break--continue)
 
 [7. Functions in Bash]
 
@@ -469,8 +475,8 @@ num2=3
 echo "scale=4; $num1/$num2" | bc
 ```
 #scale=4 means round off to 4 decimal places. bc is the calculator.
-### 5. Loops in Bash
-### [5.1 While loop](/scripts/while_loop.sh)
+### 6. Loops in Bash
+### [6.1 While loop](/scripts/while_loop.sh)
 
 The logic and rules for while loop is similar to other programming languages.
 
@@ -483,7 +489,7 @@ do
   statement3
 done
 ```
-### [5.2 For loop]
+### 6.2 For loop
 
 For loop in Bash convey the similar logic as 'for loop' does in any other programming language.
 
@@ -523,7 +529,7 @@ do
 done
 ```
 
-### [5.3 Until loop](/scripts/untilloop.sh)
+### [6.3 Until loop](/scripts/untilloop.sh)
 
 **The until loop works until  the ```[ condition ]``` is flase.**
 
@@ -536,18 +542,50 @@ do
 done
 ```
 
-### [5.4 Select loop](/scripts/selectLoop.sh)
+### [6.4 Select loop](/scripts/selectLoop.sh)
 
 It iterates through a list, and gives an indexed list, then gives a desired output based on our selection.
 
-Select is best to use with case satements.
+**Select is best to use with case satements.**
 
 ```
-select Variable in list
-do 
-  command1
-  command2
+#!/bin/bash
+
+select name in Ami Tumi Hedo Rido
+do
+   echo $name
 done
 ```
+This gives output as
+```
+1) Ami
+2) Tumi
+3) Hedo
+4) Rido
+#? 4
+Rido
+#? 3
+Hedo
+#? 1
+Ami
+#? 3
+Hedo
+```
 
-### 5.5 Break & Continue
+### 6.5 Break & Continue
+
+[Break - breaks the entire loop (current running loop)](/scripts/primeNums.sh)
+
+```
+if [ condition ] then;
+  
+  continue 
+  
+  #Or,
+  
+  break
+
+fi
+``` 
+
+Continue - terminates the present iteration of the loop and goes to the next iteration.
