@@ -370,7 +370,7 @@ esac
 ### Exit Status
 Each shell command returns an exit code when it terminates, either successfully or unsuccessfully.
 
-By convention, an exit code of zero indicates that the command completed successfully, and non-zero means that an error was encountered.
+By convention, an exit code of zero indicates that the command completed successfully, and non-zero means that the given condition is not true or an error was encountered.
 
 **Note**:
 
