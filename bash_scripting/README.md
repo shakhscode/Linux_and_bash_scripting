@@ -42,7 +42,7 @@ Bash as a scripting langugae
 &nbsp; &nbsp; [Select loop](#64-select-loop)
 &nbsp; &nbsp; [break & continue](#65-break--continue)
 
-[7. Functions in Bash]
+[7. Functions in Bash](#7-functions-in-bash)
 
 ---
 
@@ -115,10 +115,20 @@ Although we can define a variable in such a simple way, but for advance declarat
 
 #### Read only variables
 To define a static variable to ensure that its value can't be changed in future, we can use ```readonly``` command. 
+
 [validate the point by running this script](/scripts/readonlyExample.sh) .It will give an warning like 
 
 ```./readonlyExample.sh: line 9: name: readonly variable```
 
+Ways to define a readonly variable
+
+```
+readonly varName
+
+#Or,
+
+declare -r varName=value
+```
 #### Unset a variable
 If we want to delete or remove a variable we can use ```unset``` command. 
 
@@ -589,3 +599,51 @@ fi
 ``` 
 
 Continue - terminates the present iteration of the loop and goes to the next iteration.
+
+### [7. Functions in Bash](/scripts/fun1.sh)
+
+### [Define a function](/scripts/fun1.sh)
+```
+function funName() {
+
+   echo $1
+   echo $2
+   echo $3
+   ...
+   return value
+   #setting return value is not necessary
+}
+
+```
+#Note that $1, $2, $3 takes the first , second, third arguments respectively.
+
+### [Call a function](/scripts/fun1.sh)
+```
+#without arguments
+funName
+
+#with arguments
+funName arg1 arg2 arg3 
+```
+
+### Set the return value (if returned) to a variable
+```
+funcName arg1 arg2
+variable=$?
+
+#Or,
+
+variable=$(funName arg1 arg2)
+```
+**Notes:**
+- In Bash a variable declared inside the function by default acts as a global variable, i.e once the function is called, the variables of the function can be used outside the function also as normal script level variables. To avoid that we can use ```local``` status during declaring a variable inside the function.
+
+[Check the example](/scripts/globalfun_Var.sh)
+
+- Bash does not have a built-in mechanism for returning arrays from functions.
+- Like ```readonly``` variables we can also define readonly functions, i.e. a readonly function can't be modified and a new function with the same name (same name as readonly function) can't be defined within the same script.
+- we can check if there is any read only function/variable by 
+
+```readonly```  -->to check read only variables
+
+```readonly -f  ``` -->to check readonly functions
