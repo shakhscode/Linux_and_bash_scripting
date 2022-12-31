@@ -7,6 +7,7 @@
 ## Linux concepts and commands
 [History of Linux](#history-of-linux) 
 &nbsp; &nbsp; [Linux Kernel](#linux-is-a-kernel)
+&nbsp; &nbsp; [Benefits of Linux](#benefits-of-linux-based-os)
 &nbsp; &nbsp; [CLI](#cli)
 &nbsp; &nbsp; [Terminal](#terminal)
 &nbsp; &nbsp; [Shell](#shell)
@@ -24,14 +25,19 @@
 ***
 ### History of Linux
 ### Unix
-The original idea to create a multipurpose OS was started in 1964 in Bell Telephone Labs/ Bell Labs (Nokia acquired Bell Labs in 2016)
-- In 1969 Denis Ritche and Kem Thompson created a multipurpose operating system in Bell Labs  and named as 'Unics' - Uniplexed Information & Computing Service for inside use at Bell Systems. 
+The original idea to create a multipurpose OS 'MULTICS' was started in 1964 in Bell Telephone Labs/ Bell Labs (Nokia acquired Bell Labs in 2016)
+
+- In 1969 Denis Ritche and Kem Thompson created a multipurpose operating system in Bell Labs  and named as 'UNICS' - Uniplexed Information & Computing Service for inside use at Bell Systems. 
 
 - Later AT & T (American Telephone & Telegraph company) improved it more and made it public. 
 
-- Based on that a version released in 1975 as 'UNIX v6' became popular. And different companies customized it for their commercial uses and named differently.
+- Based on that a version released in 1975 as 'UNIX v6' became popular. 
+
+- And different companies customized it for their commercial uses and named differently.
 
 E.g: Mac OS is derived from UNIX. 
+
+So basically, MULTICS --> UNICS --> UNIX
 
 ### Linux
 
@@ -42,14 +48,25 @@ E.g: Mac OS is derived from UNIX.
 
 - Combining his name 'Linus' and 'MINIX' by his professor he named it 'Linux'.
 
+UNIX --> MINIX -->  LINUX + MINIX --> LINUX
+
 ### Linux is a kernel
 
 - Linux is a kernel, a kernel is like the engine of the OS.
 - Linux Kernel + GNU = An operating system.
 - GNU is a collection of free and publicly avaiable software programs, applications, libraries, developer tools, games etc. 
 - Combining a Linux Kernel with GNU software makes a perfect operating system. GNU adds other parts and facilities that a users need in an operationg system.
-E.g: Kali, Ubuntu etc. are popular linux based operating system.
- 
+
+E.g: Ubuntu, Debian, Resbian, Kali, RHEL(Redhat Enterprise Linux) etc. are popular linux based operating system.
+
+### Benefits of Linux based OS
+- Open source
+- Light weight and fast.
+- Mulitasking and multiuser.
+- Scalabiliy: Same operating system can be used on a desktop to a super computer.
+- Highly reliable.
+- Strong security(Affects only the current directory, if there is a virus.) 
+
 ### Differences between CLI, Terminal, Shell
 ### CLI 
 - There are two ways to use an opearating system or any software. One is CLI(Command line interface) and the other one is GUI (Graphical user interface). 
@@ -89,10 +106,63 @@ Root directory--> C:\ | top root directory--> Computer  /
 
 ### 1. Basics of Linux
 
+### 1.1 Types of users in Linux
+In a linux machine machine, logically there are two types of users
+- One is the super user of the system, who is like the owner of the system and has all the administrative privilages. In normal term the super user is called the administrator and in linux term it is called a **root** user.
+- Any other standard user who wants to use the system for day to day tasks like browsing internet, playing a game etc. A normal user has only limited administrative power.
 
-### File Hierarchy in Linux
-![](Directories.jpg)
+There can be only one root user for a system. But there can any number of normal users to use the system.
 
+**In practical**, a normal user can be the root user also. A normal user can switch to a root user by typing
+
+```sudo su``` --> super user do , switch user
+
+#### Introduction to linux terminal:
+A Linux terminal starts with
+
+ ```userName@systemName:workingDirectory$```
+
+(```$``` for normal users, ```#``` for root user)
+
+For example: 
+- ```root@AcerNitro5:~#``` --> Root user of the computer 'AcerNitro5' is working at the default assigned directory for the user.
+- Here, (```~```) indicates the **default directory** assigned to a user, doesn't matter what kind of user it is.
+- ```root@AcerNitro5:/home/dir1# ``` --> Root user is working at the '/home/dir1' directory.
+- ```shakh@AcerNitro5:~$ ``` --> A normal user 'shakh' is working at the default assigned directory to him.
+- ```shakh@AcerNitro5:~/project1$ ``` --> Here, ```~``` denotes the default directory ```/home/shakh``` assigned to the user 'shakh'. So  ```~```+  ```/project1``` = ```/home/shakh/project1```. I.e., the user 'shakh' is working at ```/home/shakh/project1``` directory.
+
+### 1.2 File system hierarchy in Linux
+![File systems in Linux](/pics/linuxFileSystem.jpg)
+
+```/``` --> It is top directory of a Linux based OS, like C drive in Windows.
+
+```/root``` --> Default directory for the root user of the system.
+
+```/home``` --> default working directory for all normal users.
+
+```/home/User1``` --> default assigned directory for the user 'User1'
+
+Note: 
+
+When we open a terminal, by default it starts from the home directory of the default user (out of all normal users), i.e, lets say there are total 5 normal users, out of them 'ulimoli' is the default normal user. So the terminal will start from ```/home/ulimoli```. And the 'Home' button on the GUI based file explorer opens the ```/home/ulimoli``` directory.
+
+```/boot``` --> It contains the kernel of the OS and other files needed for booting the kernel like boot loader etc.
+
+```/bin``` --> Binary: it contains binary files for essential commands whcih can be used by all users, e.g: cat, chmod etc.
+
+```/sbin``` --> System binary, It contains the essential system commands which can be used by the root user only, e.g: fdisk, dump etc.
+
+```/usr``` --> User System Resources. It contains the programs, libraries and applications available for all users (typically all your applications are in /usr/bin, /usr/lib, and /usr/games etc). It is similar to program files in Windows.
+
+```/var``` --> Variables: It contains variable information such as logs and print queues.
+
+```/dev``` --> Device: It contains information about all hardware devices.
+
+```/etc``` --> et cetera: Contains all the configuration files.
+
+```/opt``` --> Optional: Generally contains the 3rd party softwares.
+
+```/media``` --> Default mount point for removable storage media such as pen drives/hard drives etc.
 
 ### 2. Some basic commands
 - ```pwd``` --> print work directory. To get the present working directory.
