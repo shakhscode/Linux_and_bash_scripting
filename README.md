@@ -15,11 +15,23 @@
 
 ### [1. Basics of Linux](#1-basics-of-linux-1)
 
+&nbsp; &nbsp; [1.1 Linux users](#11-types-of-users-in-linux)
+
+&nbsp; &nbsp; [1.2 File systems in Linux](#12-file-system-hierarchy-in-linux)
+
 ### [2. Some  basic commands](#2-some-basic-commands-1)
+
+&nbsp; &nbsp; [listing commands](#listing-commands)
+&nbsp; &nbsp; [directory commands](#directoy-commands)
+&nbsp; &nbsp; [copy/move](#copymove-and-paste)
+
+&nbsp; &nbsp; [Other useful commands](#other-useful-commands)
 
 ### [3. File Handling in Linux](#3-file-handling-in-linux-1)
 &nbsp; &nbsp; [touch](#touch)
-&nbsp; &nbsp; [gedit](#gedit----default-gui-text-editor) &nbsp; &nbsp; [nano](#nano-editor) &nbsp; &nbsp; [vi](#vi-editor) &nbsp; &nbsp; [cat](#cat-from-concatenate) 
+&nbsp; &nbsp; [gedit](#gedit----default-gui-text-editor) &nbsp; &nbsp; [nano](#nano-editor) 
+&nbsp; &nbsp; [cat](#cat-from-concatenate) 
+&nbsp; &nbsp; [vi](#vi-editor) 
 
 ### [6. Some more Linux commands](#6-some-more-linux-commands-1)
 ***
@@ -165,27 +177,49 @@ When we open a terminal, by default it starts from the home directory of the def
 ```/media``` --> Default mount point for removable storage media such as pen drives/hard drives etc.
 
 ### 2. Some basic commands
-- ```pwd``` --> print work directory. To get the present working directory.
 
-- ```ls ```--> list the sub directories avaiable in the present directory
--``` ls -l ```--> list the files and directories in long list format with extra information
+### Listing commands
+```ls option_flag arguments ```--> list the sub directories and files avaiable in the present directory
+
+Examples:
+
+- ``` ls -l ```--> list the files and directories in long list format with extra information
 - ```ls -a ```--> list all including hidden files and directory
+- ```ls *.sh``` --> list all the files having .sh extension.
 
+- ```ls -i ``` --> list the files and directories with index numbers inodes
+- ``` ls -d */``` --> list only directories.(we can also specify a pattern)
 
-- ```cd path/directory``` --> change directory to the provided path
+### Directoy commands
+- ```pwd``` --> print work directory. Gives the present working directory.
+
+- ```cd path_to_directory``` --> change directory to the provided path
 
 - ```cd ~ ``` or just  ```cd ``` --> change directory to the home directory
-- ``` cd -``` or ``` cd ..``` --> chnage directory to one step back
-- ``` mkdir  path/directoryName``` --> to make a directory in a specific location
-```
-mkdir newFolder
 
-#Or in a specific location
-mkdir /home/user/Mydirectory
+- ``` cd - ``` --> Go to the last working directory.
 
-# To create a hidden directory or file
-mkdir .NewFolder
+- ``` cd ..``` --> chnage directory to one step back.
+
+- ``` cd ../..``` --> Change directory to 2 levels back.
+
+- ``` mkdir  directoryName``` --> to make a directory in a specific location
+
+Examples:
 ```
+mkdir newFolder              # make a new folder 'newFolder'
+
+mkdir .NewFolder              # make a hidden directory (also . before a file to make it hidden)
+
+mkdir A B C D                  #make multiple directories at the same time
+
+mkdir /home/user/Mydirectory   # make a new folder in a specific location
+
+mkdir -p  A/B/C/D              # make a nested directory
+```
+
+### Copy/Move and Paste
+
 - ``` cp source desitination ``` --> copy a file or contents of a file from a source to a destination
 
 Example: Copy the file **login.txt** from /home/user/Mini2/ to /home/user
@@ -195,8 +229,14 @@ cp /home/user/Mini2/login.txt /home/user
 - ``` mv source destination ``` --> to move a file or contents of a file from a source to a destination
 - ``` mv oldname newname ``` --> to rename a file/ directory
 
-### 3. File Handling in Linux
+### Other useful commands
+```man mkdir``` --> Gives the manual for the commands ```mkdir```
 
+```rm --help``` --> Helps to understand the commnad ```rm```
+
+```history``` --> to view the commands history
+
+### 3. File Handling in Linux
 
 > ### touch 
 
@@ -271,10 +311,29 @@ It is a CLI editor. It doesn't have GUI options.
 
 - If the file **test.txt** already exists then it will open the file on the editor to edit the file.
 
+> ### cat (from concatenate)
+We can do lot of stuff using cat command.
+
+### ```cat > file1.txt``` 
+- Creates a new empty file file1.txt if file1.txt does not exist. Then it waits to write something on it. When done with writing, press 'Ctrl + D'
+- If file1.txt already exists, then it overrides the existing file with whatever just written, and we lost the existing content.
+
+- In such case we can use the following command.
+
+### ```cat >> file1```
+- Creates a new empty file and writes on it- if the file doesn't exist.
+- If the file already exist then keeps the existing contents same and just appends the new contents to the file.
+
+``` cat file1``` --> Show the contents of the file1. If file1 doesn't exist then gives an error.
+
+```cat file1 file2 file3 > combined.txt``` --> Concatenates the contents of file1, file2, file3 line after line into a new file combined.txt
+- Here also the meaning of ```>``` and ```>>``` are diffrent and convey the same effects. 
+
 > ### vi editor
 vi/vim is not installed in my system.
 
-> ### cat (from concatenate)
+### Other file handling options
+ls > file1.txt
 
 ### File permissions
 chmod +x,w,h> --> Grant permission
