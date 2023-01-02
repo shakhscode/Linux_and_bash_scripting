@@ -1,7 +1,7 @@
 ## Git Essentials
 [What is git ?](#what-is-git)
 
-[Tracking changes with git](#1-tracking-changes-with-git)
+[1. Tracking changes with git](#1-tracking-changes-with-git)
 
 &nbsp; &nbsp; &nbsp; [Git configuration](#git-user-configurations)
 
@@ -21,6 +21,9 @@
 
 &nbsp; &nbsp; &nbsp;  [Commit the changes](#git-commit)
 
+[2. Git brances]
+
+[3. Collaboration using Git and Github]
 
 ### What is git
 Git is a version control software that tracks changes in the files in a codebase or project repository.
@@ -168,8 +171,18 @@ Git stash is a way to  save the uncommitted changes (both staged and unstaged) t
 
 ### Check History
 
-
+### Git branches
 
 ### 2. Local to Remote repo in Github
 
-### 3. Collaboration using git
+### 3. Collaboration using git & GitHub
+
+- You did some changes to your brance.
+- You commited the changes.
+- You push the changes to the remote repo.
+- Now you want to send a pull request, from ```your_branch --> another_branch``` ('another_branch' may be in the same repository or may be in the original repository of a forked repository)
+- You can send a pull request in two ways
+   1. Go to remote repo (let's say GitHub) and create a pull request using GUI options.
+   2. 
+
+git request-pull v1.0 https://git.ko.xz/project master
