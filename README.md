@@ -211,24 +211,21 @@ The information of linux users is stored in a file ```/etc/passwd```. The user i
 
 ```sudo useradd  <options>   <arguments_to_the_option>   userName```
 
-Some mostly used options are
+Some mostly used options:
 
-```-u ``` --> Specify the UID like ```useradd -u 10023 userName``` (By default it starts from ```latest_UID +1``` and goes sequentially)
+- ```-u ``` --> Specify the UID like ```useradd -u 10023 userName``` (By default it starts from ```latest_UID +1``` and goes sequentially)
 
-``` -c ``` --> Comment e.g. "Adding a new user"
+- ``` -c ``` --> Comment e.g. "Adding a new user"
 
-``` -d ``` --> assign a directory as the home directory for the user. (It assumes that the specified directory already exists. If not specified then a new directory ```/home/userName``` is created, but that directory is not visible.)
+- ``` -d ``` --> assign a directory as the home directory for the user. (It assumes that the specified directory already exists. If not specified then a new directory ```/home/userName``` is created, but that directory is not visible.)
 
-```-m``` --> When used this flag, a new directory is created that actually works. Example ```sudo useradd -m User2```, then a new directory ```/home/User2``` is created.
+- ```-m``` --> When used this flag, a new directory is created that actually works. Example ```sudo useradd -m User2```, then a new directory ```/home/User2``` is created.
 
-``` -g ``` --> specify the primary group ID for the user. The group must exist before.
+- ``` -g ``` --> specify the primary group ID for the user. The group must exist before. If the group is not specified then by default a new group is created with GID same as UID and group name same as username.
 
-**Note:**
-If the group is not specified then by default a new group is created with GID same as UID and group name same as username.
+- ``` -G ``` --> specify a comma-separated list of secondary groups. Groups must exist before.
 
-``` -G ``` --> specify a comma-separated list of secondary groups. Groups must exist before.
-
-``` -s ``` --> specify the shell user going to use
+- ``` -s ``` --> specify the shell user going to use
 
 
 **User modification:**
@@ -256,7 +253,7 @@ Optons:
 
 Options:
 
-```-r ``` --> Removes the user's home directory including all files present there and  the user's mail spool also.
+- ```-r ``` --> Removes the user's home directory including all files present there and  the user's mail spool also.
 
 ### Front end tool for useradd and userdel
 
