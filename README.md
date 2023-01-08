@@ -15,9 +15,13 @@
 
 ### [1. Basics of Linux](#1-basics-of-linux-1)
 
-&nbsp; &nbsp; [1.1 Linux users](#11-types-of-users-in-linux)
+&nbsp; &nbsp; [1.1 Linux users](#11-users-in-linux)
 
-&nbsp; &nbsp; [1.2 File systems in Linux](#12-file-system-hierarchy-in-linux)
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;[1.1.1 Types of users](#111-types-of-users)
+
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;[1.1.2 User management commands](#112-user-management-commands)
+
+&nbsp; &nbsp; [1.2 Linux Directories](#12-directory-system-in-linux)
 
 ### [2. Some  basic commands](#2-some-basic-commands-1)
 
@@ -32,6 +36,16 @@
 &nbsp; &nbsp; [gedit](#gedit----default-gui-text-editor) &nbsp; &nbsp; [nano](#nano-editor) 
 &nbsp; &nbsp; [cat](#cat-from-concatenate) 
 &nbsp; &nbsp; [vi](#vi-editor) 
+
+&nbsp; &nbsp; [3.1 File handling and redirections](#31-file-handling-and-redirections)
+
+&nbsp; &nbsp; [3.2 File Permissions](#32-file-permissions)
+
+[4. Package manager]
+
+&nbsp; &nbsp; [What is a package](#what-is-a-package)
+&nbsp; &nbsp; [Package manager](#package-manager)
+&nbsp; &nbsp;  [apt](#apt-advanced-packaging-tool)
 
 ### [6. Some more Linux commands](#6-some-more-linux-commands-1)
 ***
@@ -117,20 +131,47 @@ Root directory--> C:\ | top root directory--> Computer  /
 - There can be multiple normal users.
 
 ### 1. Basics of Linux
+### 1.1 Users in Linux
 
-### 1.1 Types of users in Linux
-In a linux machine machine, logically there are two types of users
-- One is the super user of the system, who is like the owner of the system and has all the administrative privilages. In normal term the super user is called the administrator and in linux term it is called a **root** user.
-- Any other standard user who wants to use the system for day to day tasks like browsing internet, playing a game etc. A normal user has only limited administrative power.
+User:
+- In computing a user is an entity that uses computer's progrmas, resources etc.
+- Each user has a unique name and linux identifies the user with a unique user id ```UID```
 
-There can be only one root user for a system. But there can any number of normal users to use the system.
+User groups:
+- A user group is a collection of users who are given access to certain resources or permissions on the system.
+- When a user is added to a group, they inherit the group level access & permissions.
+- Each user in Linux is a member of at least one group, and a user can be a member of multiple groups. 
+- The main group for a user is called the user's primary group, and any additional groups that the user belongs to are called secondary groups.
 
-**In practical**, a normal user can be the root user also. A normal user can switch to a root user by typing
+- A group is identified with a group id ```GID```
 
-```sudo su``` --> super user do , switch user
+### 1.1.1 Types of users
+There are basically two types of users for a Linux machine -
 
-#### Introduction to linux terminal:
-A Linux terminal starts with
+- **System users**
+
+   System users are entities created by the system that are responsible to run system services and processes known as non-interactive processes in the background which do not require human interaction. 
+
+   System users are assigned **UID from 0 to 999**.
+
+    - **Root user**
+
+      A root user (also known as super user) is **the default system user** that has all the administrative privilages.
+
+      **UID 0 is reserved for root user.**
+
+- **Normal users/local users**
+
+  A normal user/local user is a human user who wants to use the computer for day to day tasks like browsing internet, playing a game etc. A local user doesn't have all the administrative privilages.
+
+  **Normal users are identified with UID from 1000 to 60000.**
+
+  Practically, a normal user can switch to a root user by typing
+
+   ```sudo su``` --> super user do , switch user
+
+### Introduction to linux terminal:
+A [Linux terminal](#terminal) starts with
 
  ```userName@systemName:workingDirectory$```
 
@@ -143,20 +184,182 @@ For example:
 - ```shakh@AcerNitro5:~$ ``` --> A normal user 'shakh' is working at the default assigned directory to him.
 - ```shakh@AcerNitro5:~/project1$ ``` --> Here, ```~``` denotes the default directory ```/home/shakh``` assigned to the user 'shakh'. So  ```~```+  ```/project1``` = ```/home/shakh/project1```. I.e., the user 'shakh' is working at ```/home/shakh/project1``` directory.
 
-### 1.2 File system hierarchy in Linux
+
+### 1.1.2 User management commands
+
+### Users information:
+
+The information of linux users is stored in a file ```/etc/passwd```. The user information contains 7 attributes
+
+```shakh:x:1001:1001:a_comment:/home/shakh:/bin/sh```
+
+1--> User name 'shakh'
+
+2--> Mask password (x)
+
+3--> UID (1001)
+
+4--> Primary group id, GID (1001)
+
+5--> a_commnet
+
+6--> Home directory for the user
+
+7--> Default shell for the user
+
+**Adding new user: low level backend commands**
+
+```sudo useradd  <options>   <arguments_to_the_option>   userName```
+
+Some mostly used options are
+
+```-u ``` --> Specify the UID like ```useradd -u 10023 userName``` (By default it starts from ```latest_UID +1``` and goes sequentially)
+
+``` -c ``` --> Comment e.g. "Adding a new user"
+
+``` -d ``` --> assign a directory as the home directory for the user. (It assumes that the specified directory already exists. If not specified then a new directory ```/home/userName``` is created, but that directory is not visible.)
+
+```-m``` --> When used this flag, a new directory is created that actually works. Example ```sudo useradd -m User2```, then a new directory ```/home/User2``` is created.
+
+``` -g ``` --> specify the primary group ID for the user. The group must exist before.
+
+**Note:**
+If the group is not specified then by default a new group is created with GID same as UID and group name same as username.
+
+``` -G ``` --> specify a comma-separated list of secondary groups. Groups must exist before.
+
+``` -s ``` --> specify the shell user going to use
+
+
+**User modification:**
+
+```usermod <options> <arguments> userName``` 
+
+Optons:
+
+- All options of ```useradd``` can be used with ```usermod```
+
+- ```-l``` --> change only the user name. Example: ```usermod -l NewName old_userName```
+
+- ``` -L ``` --> Lock the account
+
+- ``` -U ``` --> Unlock the account
+
+
+```groups userName``` --> Show all the groups where the user is a member
+
+``` id userName ``` --> Show all the ids related to the user.
+
+**Deleting a user:**
+
+```userdel <options> userName```
+
+Options:
+
+```-r ``` --> Removes the user's home directory including all files present there and  the user's mail spool also.
+
+### Front end tool for useradd and userdel
+
+Adding new user:
+
+```adduser <options> userName ```
+
+Deleting a user:
+
+``` deluser <options> userName```
+
+**Notes:** If there is only one user in a group and that user is deleted  using this front end tool then by default the group is also deleted.
+
+### Group information:
+
+On Linux, group information is held in the ```/etc/group``` file. 
+
+Information about a particular group looks like ```groupName:x:1050:B,C,D``` where
+- ```A``` is the group name
+- ```x``` is the mask password
+- ```1050``` is the group id.
+- ```B,C,D``` are the secondary members of the group
+
+```cat /etc/group``` --> Show information about all the groups
+
+```getent group``` --> does same job as above command.
+
+``` compgen -g``` --> shows only name of the groups.
+
+```getent group group_id/Group_Name``` --> shows information about a particular group
+
+**Create a new group:**
+
+```
+groupadd -g group_id groupName
+```
+
+**Get all the members present in a group:**
+
+```
+getent group group_id/group_name
+```
+Or, 
+
+```
+sudo apt-get install members      #need to install this tool
+
+members groupName                 #shows only names of the members present in the group
+```
+
+Or, 
+
+```
+suod apt-get install libuser     #need to install this tool
+sudo libuser-lid -g testgroup    #shows members along with user id
+```
+**Add/remove users to/from a group:**
+
+```gpasswd <option> <argument> groupName```
+
+Options: 
+- ```-a ``` --> add a user to a group. Example, ```sudo gpasswd -a user3 Group1``` --> add user user3 to the group Group1
+
+- ``` -M ``` --> add multiple users to a group. Example, ```sudo gpasswd -M user3,user4 Group1```
+
+- ``` -d ``` --> remove a user from a group
+
+**Modify a group**
+
+```groupmod <option> <srguments> groupName```
+
+Options:
+- ```-g``` --> Group Id
+
+- ``` -o ``` --> Override
+
+- ``` -n ``` --> for group name related tasks.
+
+Example: Rename a group
+
+```sudo groupmod -n newName oldName```
+
+**Delete a group:**
+
+```groupdel groupName```
+
+- A group can't be deleted if it has primary members.
+
+### 1.2 Directory system in Linux
+
 ![File systems in Linux](/pics/linuxFileSystem.jpg)
 
-```/``` --> It is top directory of a Linux based OS, like C drive in Windows.
+```/``` --> It is the top directory of a Linux based OS, like C drive in Windows.
 
 ```/root``` --> Default directory for the root user of the system.
 
 ```/home``` --> default working directory for all normal users.
 
-```/home/User1``` --> default assigned directory for the user 'User1'
+```/home/User1``` -->  assigned directory for the user 'User1'
 
 Note: 
 
-When we open a terminal, by default it starts from the home directory of the default user (out of all normal users), i.e, lets say there are total 5 normal users, out of them 'ulimoli' is the default normal user. So the terminal will start from ```/home/ulimoli```. And the 'Home' button on the GUI based file explorer opens the ```/home/ulimoli``` directory.
+When we open a terminal, by default it starts from the home directory of the default user (user with ```UID = 1000```, i.e the use created during installation process) out of all normal users i.e, lets say there are total 5 normal users, out of them 'ulimoli' is the default user with UID =1000. So the terminal will start from ```/home/ulimoli```. And the 'Home' button on the GUI based file explorer opens the ```/home/ulimoli``` directory.
 
 ```/boot``` --> It contains the kernel of the OS and other files needed for booting the kernel like boot loader etc.
 
@@ -207,15 +410,17 @@ Examples:
 
 Examples:
 ```
-mkdir newFolder              # make a new folder 'newFolder'
+mkdir newFolder                  # make a new folder 'newFolder'
 
-mkdir .NewFolder              # make a hidden directory (also . before a file to make it hidden)
+mkdir .NewFolder                 # make a hidden directory (also . before a file to make it hidden)
 
-mkdir A B C D                  #make multiple directories at the same time
+mkdir A B C D                    #make multiple directories at the same time
 
-mkdir /home/user/Mydirectory   # make a new folder in a specific location
+mkdir /home/user/Mydirectory     # make a new folder in a specific location
 
-mkdir -p  A/B/C/D              # make a nested directory
+mkdir -p  A/B/C/D                # make a nested directory
+
+mkdir day{1..10}                 #makes 10 directoris as day1 day2 day3 ... day10
 ```
 
 ### Copy/Move and Paste
@@ -332,12 +537,68 @@ We can do lot of stuff using cat command.
 > ### vi editor
 vi/vim is not installed in my system.
 
-### Other file handling options
+### 3.1 File handling and redirections
+
+
 ls > file1.txt
 
-### File permissions
+### 3.2 File permissions
 chmod +x,w,h> --> Grant permission
 chmod - --> Remove permission. 
+
+
+### 4. Package manager
+### What is a package?
+In the context of Linux, a package is a collection of files that are bundled together and distributed over the internet. These packages contain the code, libraries, and any other resources that are needed to run a piece of software on the system. 
+
+Packages are typically created by the developers of the software and are made available for download from online repositories or package repositories.
+
+**In simple word any software is a package.**
+
+There are different package formats and we need a package manager to install, remove, update packages.
+
+Example:
+
+- **DEB** (```.deb``` extension) is the default package format on many popular Linux distributions, including Ubuntu and Debian. DEB packages are typically installed using the apt package manager.
+
+- RPM: This is the default package format on many Red Hat-based Linux distributions, such as Fedora and CentOS. RPM packages are typically installed using the yum or dnf package managers.
+
+Packages are normally in a pre-compiled binary format; thus installation is quick and requires no compiling of software.
+### Package manager
+A package manager is a software application that helps the user to install, remove, upgrade, configure and manage software packages on an operating system.
+
+The package manager can be a GUI application like **synaptic package manager** or  a CLI tool like apt-get.
+
+There are many different package managers available for Linux systems, each with its own set of features and capabilities. Some common package managers for Linux include:
+
+- **apt**(Advanced Packaging Tool): default package manager on Ubuntu and Debian. It is a CLI package manager with  capabilities of installing, updating, and removing software packages from online repositories.
+
+- **yum**: This is the default package manager on many Red Hat-based Linux distributions, such as Fedora and CentOS. 
+
+- **dnf:** This is the successor to yum and is the default package manager on some newer Red Hat-based Linux distributions, such as Fedora 22 and later. 
+
+### Package managers on Ubuntu
+
+### apt: Advanced packaging tool
+
+Install a Package:
+
+```sudo apt install nmap``` --> Installs nmap network scanner package
+
+Remove a Package: 
+
+```sudo apt remove nmap``` --> Remove the package nmap
+
+Update the Package Index:
+
+The APT package index is essentially a database of available packages from the repositories defined in the /etc/apt/sources.list file and in the /etc/apt/sources.list.d directory. 
+
+sudo apt update
+
+
+
+
+
 
 
 ### 6. Some more Linux commands

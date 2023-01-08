@@ -177,12 +177,14 @@ Git stash is a way to  save the uncommitted changes (both staged and unstaged) t
 
 ### 3. Collaboration using git & GitHub
 
-- You did some changes to your brance.
-- You commited the changes.
-- You push the changes to the remote repo.
-- Now you want to send a pull request, from ```your_branch --> another_branch``` ('another_branch' may be in the same repository or may be in the original repository of a forked repository)
-- You can send a pull request in two ways
-   1. Go to remote repo (let's say GitHub) and create a pull request using GUI options.
-   2. 
+Scenerio 1: Sending a pull request to other branches.
 
-git request-pull v1.0 https://git.ko.xz/project master
+You did some changes in your branch in the local repo --> You commited the changes --> You pushed the changes to your branch in the remote repository. Now you want to send a pull request -
+
+```your_branch``` -->  ``` another_branch``` 
+
+('another_branch' may be in the same repository or may be in the original upstream repository of a forked repository)
+
+You can create a pull request in two ways
+   1. Go to remote site (let's say GitHub) and create a pull request from your_branch to the another_branch using GUI options.
+   2. Using [hub](https://hub.github.com/). Hub is a git command line extension for GitHub tasks.
