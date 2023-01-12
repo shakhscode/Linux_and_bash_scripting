@@ -54,11 +54,16 @@ git config --global user.email "myemail_id@email.com"
 Once configured check the configurations
 ```
 git config -l
+
+#Or,
+
+git config --global --list
 ```
 To change the user configuration
 ```
 git config --edit --global
 ```
+
 
 Moreover there are other options to configure the git facilities like core-editor, merge tools, color outputs and aliases to git commands.
 
@@ -169,10 +174,11 @@ Git stash is a way to  save the uncommitted changes (both staged and unstaged) t
 
 ### Git Commit
 
+A commit is actually a new version of the codebase. It can exist only locally or remotely. The latest commit on the history is the Head.
 ### Check History
 
 ### Git branches
-
+Head - the "latest" branch that made a commit.
 ### 2. Local to Remote repo in Github
 
 ### 3. Collaboration using git & GitHub

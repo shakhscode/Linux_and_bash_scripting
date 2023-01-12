@@ -37,9 +37,11 @@
 &nbsp; &nbsp; [cat](#cat-from-concatenate) 
 &nbsp; &nbsp; [vi](#vi-editor) 
 
-&nbsp; &nbsp; [3.1 File handling and redirections](#31-file-handling-and-redirections)
+&nbsp; &nbsp; [3.1 File Handling](#31-file-handling)
 
-&nbsp; &nbsp; [3.2 File Permissions](#32-file-permissions)
+&nbsp; &nbsp; [3.1 Descriptors & I/O redirection](#32-file-descriptors--io-redirections)
+
+&nbsp; &nbsp; [3.3 File Permissions](#33-file-permissions)
 
 [4. Package manager]
 
@@ -422,16 +424,29 @@ mkdir day{1..10}                 #makes 10 directoris as day1 day2 day3 ... day1
 
 ### Copy/Move and Paste
 
-- ``` cp source desitination ``` --> copy a file or contents of a file from a source to a destination
+Copy paste:
+
+``` cp <options> source desitination ``` 
 
 Example: Copy the file **login.txt** from /home/user/Mini2/ to /home/user
 ```
 cp /home/user/Mini2/login.txt /home/user
 ```
-- ``` mv source destination ``` --> to move a file or contents of a file from a source to a destination
-- ``` mv oldname newname ``` --> to rename a file/ directory
+Options:
+- ```-r``` --> copy the directory along with its contents.
+- ```-p``` --> copy with permissions 
+- ```-v ``` --> Verbose
+
+Move: 
+
+``` mv source destination ``` --> to move a file or contents of a file from a source to a destination
+
+Rename:
+
+``` mv oldname newname ``` --> to rename a file/ directory
 
 ### Other useful commands
+
 ```man mkdir``` --> Gives the manual for the commands ```mkdir```
 
 ```rm --help``` --> Helps to understand the commnad ```rm```
@@ -534,15 +549,197 @@ We can do lot of stuff using cat command.
 > ### vi editor
 vi/vim is not installed in my system.
 
-### 3.1 File handling and redirections
+### 3.1 File handling
+
+``` cat fileName``` --> open a file and show the contents on the terminal.
+
+**Open a file in a script and readlines one by one:**
+```
+for line in $(cat input.txt); do
+    echo $line
+done
+```
+```head -n fileName.txt ``` --> Show first n lines of the file **fileName.txt**. (Default value of n is 10)
+
+```tail -n fileName.txt ``` --> Show bottom n lines of the file **fileName.txt**. (Default value of n is 10)
+
+```more fileName``` --> Opens a file on the terminal, we can move only foreward by pressing the 'Enter' button. Can't move backward. It shows more when we press 'Enter', thats why more.
+
+```less fileName``` --> Opens a file on the terminal and fully utilizes the availabe screen. It doesnot read the complete file before opening, so it is faster to open large files. It is opposite to more. We can move in both forward and backward direction. It shows only a particular portion (lees) that the screen can view,
+
+```wc <option> fileName.txt``` --> gives no of lines (```-l```) , no of words  (```-w```), and byte counts in the file fileName.txt
+
+**Find files or directories:**
+
+```find /path <options> expression``` 
+
+It looks for files based on various criteria such as name, type, size, and modification time.
+
+- path: is the directory where the search will begin. If no path is specified, the search will start from the current directory.
+
+- options: are used to specify how the search should be conducted and what information should be returned.
+
+- expression: is used to specify the criteria for the search.
+
+Example:
+```
+find /home/user -name "*.txt" -mtime +30
+```
+This command searches the /home/user directory for all files with the .txt extension that haven't been modified in the last 30 days.
 
 
-ls > file1.txt
+**Pipe Operator:**
 
-### 3.2 File permissions
-chmod +x,w,h> --> Grant permission
-chmod - --> Remove permission. 
+We can use the ```| ``` symbol to pipe the output of one command into another command as input.
 
+For example, to count the number of lines in a file named "input.txt", we can use the command 
+
+```
+cat input.txt | wc -l.
+```
+It will open the file first them it will count the number of lines.
+
+
+### 3.2 File descriptors & I/O redirections
+
+**File descriptors:**
+
+File descriptors are integers  that act as unique identifiers for an open file or other I/O resource in a Linux system.
+
+Integer | Process
+--------|--------
+0 | stdin --> standard input (read operation). The bash shell takes input from stdin. By default, keyboard is used as input. 
+1| stdout --> standard output (write operation). The bash shell sends output to stdout. Output goes to display.
+2|stderr --> standard error (write operation). The bash shell sends error message to stderr. Error message goes to display.
+
+**File redirections:**
+
+We can redirect the retunred output or error message of a linux command into a file, rather than displaying the output on the terminal.
+
+**Override (>)**
+
+```command > file1``` --> redirect the output of the command to a file file1. If ```file1``` already exists then content is over written. i.e. old content is removed and new content is added.
+
+**Append (>>)**
+
+```command >> file1 ``` --> redirect the output of the command to a file ```file1```. If file1 already exists then old content keeps the same and new content is appended.
+
+**Redirections with descriptors:**
+
+``` command > file1``` or ``` command 1> file1```--> Send output into file1
+
+``` command 2> file2``` --> Send error message into file2
+
+```command 1> file1 2> file2``` --> Send output of the command to file1 and error message (if any) to file2
+
+**Merge:**
+
+```command &> file1``` --> redirect by merging the standard output **&** the error message (if any) into the file ```file1```
+
+``` command 2>&1 ``` --> redirect standrard error as the standard output.
+
+**Input redirections:**
+
+a) Taking inputs from a file
+
+``` command < inputfile1 ``` 
+
+The  ```   <  ``` or ``` 0< ``` symbol is used for input redirection. It redirects the shell to take the contents of the specified file and use it as inputs for the command.
+
+Examples:
+- ``` sort < inputfile1   ```this takes inputs from inputfile1 and sorts them.
+- ``` sort < inputfile1 > sorted.txt  ``` this takes numbers from inputfile1, sort them and save the sorted numbers into a new file sorted.txt
+
+b) Here-doc
+
+A here document (here doc) is a type of redirection that redirects to multiple inputs (like append inputs one after another) or interactive inputs for a command.
+
+**Here doc is useful when we want to pass multiple lines of input to a command.** 
+
+Syntax:
+
+```
+command << DELIMETER
+
+line1
+
+line2
+
+line3
+
+DELEMETER
+```
+#DELEMETER is a string that marks the START and END of inputs.
+
+**Example:**
+
+Lets say we want to sort ```E, d, eg,re,ew,L``` into alphabetical order and these alphabets are not stored in file (as in the previous case). We want to give these alphabets as inputs on the way when we want to sort them.
+
+So we can type on the terminal ``` sort << EOF ```. This will give us an interactive input window. We can add multiple inputs and when the here-doc will be ended using the delimeter ```EOF```, it will immediately sort out the input strings into alphabetical order.
+
+```
+User@AcerNitro5:~$ sort << EOF
+> E
+> d
+> eg
+> re
+> Ew
+> L
+> EOF
+d
+E
+eg
+Ew
+L
+re
+```
+So basically ```<``` redirects to inputs from a input file for a particular and  a here-doc ```<<``` redirects to multiple present time given inputs for a particular command.
+
+### 3.3 File permissions
+
+![File permissions in linux](/pics/1673452553028.jpeg)
+
+- In Linux platforms permissions are secured by the default mechanism called Umask.
+
+- Only the file owner or the root user can change the permissions.
+
+File Type:
+- ```-``` --> means it is a single file
+
+- ``` d ``` --> directory
+
+- ```l``` --> links
+
+Access modes:
+- **r or 4** --> Only  read the file and list the files in a directory
+
+- **w or 2** --> Write or modify or append the file and create/remove files and directories in/from a directory.
+
+- **x or 1** --> Execute the file and enter into a directory.
+
+Example: **645**
+- 6(4+2+0, means only read and write) for user permisiions.
+
+- 4(4+0+0, means only read permission) for group permissions.
+
+- 5(4+0+1, means only read and executable) for other user permissions.
+
+### Modify the permissions
+
+```chmod <permissions> <file/directory>``` --> chmod: change mode
+
+```+``` for owner(particular user)
+
+```-``` for group
+
+```=``` for others
+
+Changing mode in absolute form (numbers form) is a good option. Example,
+
+```chmod 754 file.txt```
+
+
+### 4. Access control list (ACL)
 
 ### 4. Package manager
 ### What is a package?
