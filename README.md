@@ -43,8 +43,9 @@
 
 &nbsp; &nbsp; [3.3 File Permissions](#33-file-permissions)
 
-[4. Package manager]
+[4. Access control list](#4-access-control-list-acl)
 
+## Others 
 &nbsp; &nbsp; [What is a package](#what-is-a-package)
 &nbsp; &nbsp; [Package manager](#package-manager)
 &nbsp; &nbsp;  [apt](#apt-advanced-packaging-tool)
@@ -734,14 +735,38 @@ Example: **645**
 
 ```=``` for others
 
-Changing mode in absolute form (numbers form) is a good option. Example,
+Changing mode in absolute form (numbers form) is a good option.
+
+Example,
 
 ```chmod 754 file.txt```
 
 
-### 4. Access control list (ACL)
+Notes:
+- chmod --> Change mode, 
 
-### 4. Package manager
+- chown --> Change owner
+
+- chgrp --> Change group
+
+### 3.4 Control file permissions
+We can also control permissions of a file or directory for owner, groups &  others using ```facl ```(file access control list) commands.
+
+
+ACL stands for "Access Control List". It's a way of giving specific users or groups certain permissions to access certain files or directories on a Linux system. For example, you can use ACLs to give a certain user permission to read and write to a specific file, while denying that same permission to other users. This way you can have more fine-grained control over who can access and make changes to files on your system.
+
+```setfacl -m u:userName:permission   file/Directory``` --> Assign permission for a user
+
+```setfacl -m g:groupName:permission   file/Directory``` --> Assign permission for a group
+
+```getfacl file/Directory``` --> To list the applied ACLs on a file or directory
+
+chown usesrName file/Directory
+
+
+
+
+### oo. Package manager
 ### What is a package?
 In the context of Linux, a package is a collection of files that are bundled together and distributed over the internet. These packages contain the code, libraries, and any other resources that are needed to run a piece of software on the system. 
 
