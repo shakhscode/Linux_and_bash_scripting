@@ -43,7 +43,7 @@
 
 &nbsp; &nbsp; [3.3 File Permissions](#33-file-permissions)
 
-[4. Access control list](#4-access-control-list-acl)
+&nbsp; &nbsp; [3.4 Access control list](#34-control-file-permissions)
 
 ## Others 
 &nbsp; &nbsp; [What is a package](#what-is-a-package)
@@ -694,7 +694,7 @@ Ew
 L
 re
 ```
-So basically ```<``` redirects to inputs from a input file for a particular and  a here-doc ```<<``` redirects to multiple present time given inputs for a particular command.
+So basically ```<``` redirects to inputs from a input file for a particular command and  a here-doc ```<<``` redirects to multiple present time given inputs for a particular command.
 
 ### 3.3 File permissions
 
@@ -712,11 +712,11 @@ File Type:
 - ```l``` --> links
 
 Access modes:
-- **r or 4** --> Only  read the file and list the files in a directory
+- **r or 4** --> Only read the file or list the files in a directory(for directories)
 
-- **w or 2** --> Write or modify or append the file and create/remove files and directories in/from a directory.
+- **w or 2** --> Write or modify or append the file or create/remove files and directories in/from a directory.
 
-- **x or 1** --> Execute the file and enter into a directory.
+- **x or 1** --> Execute the file and enter into a directory (for directories).
 
 Example: **645**
 - 6(4+2+0, means only read and write) for user permisiions.
@@ -727,41 +727,101 @@ Example: **645**
 
 ### Modify the permissions
 
-```chmod <permissions> <file/directory>``` --> chmod: change mode
+```chmod <permissions> <file/directory>``` 
 
-```+``` for owner(particular user)
+**Options for permissions:**
+- ``` u ``` --> for user
+- ``` g ``` --> for group
+- ``` o ``` --> for others
+- ``` + ``` --> grant permission
+- ``` - ``` --> remove permission
+- ``` = ``` --> Reset permissions
+- r or 4 --> read
+- w or 2 --> write
+- x or 1--> execute
 
-```-``` for group
+Examples:
 
-```=``` for others
+  - ```chmod +rx file1 ``` --> This gives permission to read and execute file1 by default to all i.e.,user(owner), group and others.
 
-Changing mode in absolute form (numbers form) is a good option.
+  - ```chmod ugo+x think``` --> This gives permission  execute file1 to user(owner), group and others. (So, ```ugo``` is the default option)
 
-Example,
+  - ``` chmod ug+x file1``` --> This gives permission to execute file1 to user(owner) and group
+
+- ``` chmod -x file1``` --> Removes execute permission for file1 by default from user(owner), groups & others.
+
+- ``` chmod o-wx file1``` --> Removes write, execute permission from others
+
+- ```chmod = file``` --> Resets all permissions (read,write,execute) for file1 to 000 for all i.e.,user(owner), group and others.
+
+- ```chmod u+rwx think``` --> Gives read,write, execute permission for file1 to the user(owner)
+
+
+**Tip:** Changing mode in absolute form (numbers form) is a good option. For example,
 
 ```chmod 754 file.txt```
 
+This means
+- 7(4+2+1--> read, write, execute) for user
+- 5 (4+0+1--> read, execute)for group
+- 4(4+0+0 --> read only) for others
 
 Notes:
-- chmod --> Change mode, 
+- chmod --> Change mode
 
 - chown --> Change owner
 
+- ```chown olimoli_user file/Directory``` --> Changes ownership of the file/Directory from existing user to the user olimoli_user. Now olimoli_user owns the file/Directory.
+
 - chgrp --> Change group
 
+- ```chgrp Group2 file/Directory``` --> Changes ownership of the file/Directory from existing group to Group2. Now Group2 owns the file/Directory
+
 ### 3.4 Control file permissions
-We can also control permissions of a file or directory for owner, groups &  others using ```facl ```(file access control list) commands.
+Using  ```chmod``` we can only set & modify permissions for a single user, a single group, and everyone else. (Works for current user and current users primary group). We can't use ```chmod``` to modify access permissions for multiple users and groups.
 
 
-ACL stands for "Access Control List". It's a way of giving specific users or groups certain permissions to access certain files or directories on a Linux system. For example, you can use ACLs to give a certain user permission to read and write to a specific file, while denying that same permission to other users. This way you can have more fine-grained control over who can access and make changes to files on your system.
+**ACL**
 
-```setfacl -m u:userName:permission   file/Directory``` --> Assign permission for a user
+ACL stands for "Access Control List". It is basically a control process to control access permissions for a certain file/Directory to different users & groups . Using ACL we can set & modify access permissions for files/directories for multiple users and groups, which we can't do using ```chmod``` command.
 
-```setfacl -m g:groupName:permission   file/Directory``` --> Assign permission for a group
+For example, We can use ACLs to give access to a user to read and write to a specific file, while denying the same permissions to other users. 
 
-```getfacl file/Directory``` --> To list the applied ACLs on a file or directory
+**Note:** ACL commands work only on ACL enabled partitions.
 
-chown usesrName file/Directory
+**ACL commands**
+- ```getfacl file/Directory``` --> To list the applied ACLs on a file or directory
+
+This shows the list as shown below
+```
+# file: think
+# owner: user
+# group: Shakh
+user::rwx
+user:user2:rwx
+user:testUser:r--
+group::---
+group:Shakh:rwx
+mask::rwx
+other::r-x
+```
+The "mask" entry in an Access Control List (ACL) represents a value that is used to limit the permissions that can be granted to other users and groups on a file or directory.
+
+The mask is calculated as the intersection of all permissions of the file's owner, group owner and all named users and groups. We can modify the mask if we want.
+
+- ```setfacl``` is the command used to set & modify permissions for multiple users and groups.
+
+- ```setfacl -m u:User3:permission   file/Directory``` --> modify file/Directory permissions for User3.Set specified permissions to User3.
+
+- ```setfacl -m g:Group12:permission   file/Directory``` --> modify file/Directory permissions for Group12. Set specified permissions to Group12.
+
+- ```setfacl -m u:user2:r,g:group2:x file2.txt``` --> Modify file2.txt access permissions both for user2 and group2 at the same time.
+
+- ```setfacl -m m::rw- file?Directory``` --> modify the mask
+
+- ``` setfacl -x u:userName:permissions file/Directory``` --> Removes specified permissions for a file/Directory from user2.
+
+
 
 
 
