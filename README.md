@@ -821,8 +821,8 @@ The mask is calculated as the intersection of all permissions of the file's owne
 
 - ``` setfacl -x u:userName:permissions file/Directory``` --> Removes specified permissions for a file/Directory from user2.
 
-
-
+### 4. Partitions and Swap
+A partition is a logical division of Hard disk.
 
 
 
